@@ -1,0 +1,80 @@
+package edu.grinnell.csc207.greenber.utils;
+
+import java.math.BigInteger;
+
+import java.lang.String;
+
+public class Calculator {
+
+	public static void main(String[] args) {
+		String foo = "HelloHello:Hello";
+		String bar = "+";
+		String bar2 = "3@+ |3@|\\|@|\\|@";
+		String shi = "Shirley"; 
+		System.out.println(bar2);
+		
+		System.out.println(shi);
+		System.out.println(shi.charAt(0));
+		String expr = "1 + 2";
+		String expr2 = "1 + 2 + 4 + 5 + 7 + 9";
+		String fooz = "1 - 2 + 3 + 4 + 5 ^ 9";
+		BigInteger x = eval0(fooz);
+		System.out.println("Hello = " + x); 
+		
+		
+	}
+	
+	public static BigInteger eval0(String exp)
+	{
+		String delims = "[+\\-*/\\^ ]+";
+		String delimz = "[123456789]";
+		exp = exp.replaceAll("\\s+", "");//deletes the spaces
+		String[] numbers = exp.split(delims); //gets the numbers
+		String[] expressions = exp.split(delimz); //gets the math expressions
+		int counter = 1;//Hold the place for the nums
+		int place = 1; //holds for the math expressions
+		BigInteger num = new BigInteger (numbers[0]);
+		BigInteger finalProduct = num;  
+		
+		while (place < expressions.length)
+		{
+			num = new BigInteger (numbers[counter]); 
+			String express = expressions[place];
+			switch(express){
+			case "+":
+				finalProduct = finalProduct.add(num);
+				place += 1; 
+				counter += 1;
+				break; 
+			case "-":
+				finalProduct = finalProduct.subtract(num);
+				place += 1; 
+				counter += 1;
+				break;
+			case "*": 
+				finalProduct = finalProduct.multiply(num);
+				place += 1; 
+				counter += 1;
+				break;
+			case "/": 
+				finalProduct = finalProduct.divide(num);
+				place += 1; 
+				counter += 1;
+				break;
+			case "^":
+				int numInt  = num.intValue();
+				finalProduct = finalProduct.pow(numInt); 
+				place += 1; 
+				counter += 1;
+				break;
+				
+				
+				
+			}
+		}//while loop 
+		
+		
+		return finalProduct; 
+	}
+	
+}

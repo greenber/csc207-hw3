@@ -1,0 +1,14 @@
+package edu.grinnell.csc207.greenber.utils;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class deleetTesting {
+
+	@Test
+	public void testDeleet() {
+		fail("Not yet implemented");
+	}
+
+}

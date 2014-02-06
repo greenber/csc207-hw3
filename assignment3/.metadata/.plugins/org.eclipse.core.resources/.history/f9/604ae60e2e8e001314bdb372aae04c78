@@ -1,0 +1,68 @@
+package edu.grinnell.csc207.greenber.utils;
+
+import java.math.BigInteger;
+
+import java.lang.String;
+
+public class Calculator {
+
+	public static void main(String[] args) {
+		String foo = "1:Hello:Hello";
+		String bar = "+";
+		String bar2 = "3@+ |3 |3 |3@|\\|@|\\|@";
+		String[] barz = StringUtils.splitAt(foo, ':'); 
+		System.out.println(barz[1]); 
+		
+		
+	}
+	
+	public static BigInteger eval0(String exp)
+	{
+		String delims = "[+\\-*/\\^ ]+";
+		String delimz = "[123456789]";
+		exp = exp.replaceAll("\\s+", "");//deletes the spaces
+		String[] numbers = exp.split(delims); //gets the numbers
+		String[] expressions = exp.split(delimz); //gets the math expressions
+		int counter = 1;//Hold the place for the nums
+		int place = 1; //holds for the math expressions
+		BigInteger num = new BigInteger (numbers[0]);
+		BigInteger finalProduct = num;  
+		
+		while (place < expressions.length)
+		{
+			num = new BigInteger (numbers[counter]); 
+			String express = expressions[place];
+			switch(express){
+			case "+":
+				finalProduct = finalProduct.add(num);
+				place += 1; 
+				counter += 1;
+				break; 
+			case "-":
+				finalProduct = finalProduct.subtract(num);
+				place += 1; 
+				counter += 1;
+				break;
+			case "*": 
+				finalProduct = finalProduct.multiply(num);
+				place += 1; 
+				counter += 1;
+				break;
+			case "/": 
+				finalProduct = finalProduct.divide(num);
+				place += 1; 
+				counter += 1;
+				break;
+			case "^":
+				int numInt  = num.intValue();
+				finalProduct = finalProduct.pow(numInt); 
+				place += 1; 
+				counter += 1;
+			}
+		}//while loop 
+		
+		
+		return finalProduct; 
+	}
+	
+}

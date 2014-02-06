@@ -1,0 +1,164 @@
+package edu.grinnell.csc207.greenber.utils;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+/*Citations:
+ *   Elias 
+ *   Helen
+ *   Aaron 
+ *   Chirstine 
+ *   Vasilisa
+ *   
+ */
+public class StringUtils {
+/*
+ * splitAt
+ * 
+ * Splits the string at a certain character
+ * Takes: 
+ * 	  A string
+ *    a character
+ * pre: 
+ *    None
+ * post:
+ *    Gives back an array of strings
+ */
+	
+	public static String[] splitAt(String str, char c) {
+		int index = str.indexOf(c);
+		int length = 0; 
+		int i = 0;
+		ArrayList<String> split = new ArrayList<String>();  
+		while (index != -1) {
+			split.add(str.substring(0, index));
+			str = str.substring(index + 1);
+			index = str.indexOf(c);
+		}//while
+		split.add(str);
+		String[] splitstring = split.toArray(new String[split.size()]); 
+		return splitstring; 
+	}// splitAt
+	
+	public static String[] splitCSV(String str)
+	{
+		ArrayList<String> split = new ArrayList<String>();
+		int i = 0;
+		int quotes = 0; 
+		int index = str.indexOf(",");
+		int start = 0;
+		int stop = str.length();
+		while (index != -1)
+		{
+			System.out.println("right after the while");
+			String temp = str.substring(0, index); //from the start to the comma
+			System.out.println("Temp " + temp);
+			for (int j = 0; j < temp.length(); j++)
+			{
+				if (temp.charAt(j) == '\"')
+				{
+					System.out.println("In the for loop"); 
+					System.out.println("quotes " + quotes);
+					quotes++; 
+				}//if 
+			}//for 
+			if ((quotes % 2) == 1)
+			{
+				String temp2 = str.substring(index + 1);
+				int index2 = temp2.indexOf(",");
+				String temp3 = str.substring(0, 1 + index + index2);
+				split.add(temp3);//adds the string
+				str = str.substring(1 + index + index2); 
+				System.out.println("new str " + str);
+				System.out.println("index2 " + index2); 
+				System.out.println("index in quotes " + quotes); 
+				System.out.println("temp2 " + temp2); 
+				break;
+			}//if 
+			else
+			{
+				System.out.println("about to add shit");
+				System.out.println("index" + index);
+				split.add(temp);  
+			}//else
+			str = str.substring(index + 1); 
+			System.out.println("new str " + str);
+			start = index;
+			index = str.indexOf(",");
+		}//outer while
+		System.out.println("final str " + str);
+		split.add(str);
+		String[] splitstring = split.toArray(new String[split.size()]);
+		System.out.println(splitstring[0]);
+		System.out.println(splitstring[1]);
+		System.out.println(splitstring[2]);
+		System.out.println(splitstring[3]); 
+		return splitstring; 
+	}//splitCSV
+	
+	//If has a \" then it is a "
+	//if it is within that quote then don't cut when , happens
+	// If I find that \", then mark it.  
+	//if I find \"\" then \". 
+	//if has \"\" then it changes to \"
+	//I have check all of that 
+	//indexOf can be used with strings 
+	// I need to check to see if it is a quote
+	// if not then cut
+	//
+	
+/*
+ * deleet
+ * 
+ * Generates a string that has been translated out of leet speak
+ * Para:
+ *   A string
+ * Pre: 
+ *    None
+ * Post:
+ *   Replace the letter with a lower case	
+ */
+	public static String  deLeet(String str)
+	{
+		str = str.replace("|3", "b");
+		str = str.replace('3', 'e');
+		str = str.replace('1', 'l');
+		str = str.replace('@', 'a');
+		str = str.replace("|\\|", "n");
+		str = str.replace('0', 'o');
+		str = str.replace('+', 't');
+
+		return str;
+		
+	}//deleet
+/*
+ * nameGame
+ * 
+ * Outputs a string that plays the namegame
+ * para: 
+ *   A string
+ * pre: 
+ *   The string can't have a vowel at the beginning
+ *Post: 
+ *   Prints its and returns the string 
+ */
+
+	public static String nameGame(String name) {
+		char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
+		int place = 0;
+		int counter = 0;
+		while (name.charAt(counter) != vowels[place]) {
+			place = 0; 
+			counter += 1; 
+			while ((name.charAt(counter) != vowels[place]) && (place < vowels.length - 1)) {
+				place += 1;
+			}//inner while
+		}//outer while
+		String nameEnd = name.substring(counter, name.length());
+		String game = name + "! " + "\n"+ name + " ," + name + " bo B" + nameEnd
+				+ " Bonana fanna fo F" + nameEnd + "\n" + " Fee Fy mo M" + nameEnd
+				+ ", " + "\n" +name;
+		System.out.println(game);
+		return game;
+	}//nameGame
+	
+}

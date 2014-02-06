@@ -1,0 +1,14 @@
+package edu.grinnell.csc207.greenber.utils;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class SpiltAtTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}
